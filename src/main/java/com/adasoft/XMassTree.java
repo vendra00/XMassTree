@@ -1,6 +1,7 @@
 package com.adasoft;
 
 import java.io.InputStream;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -40,10 +41,36 @@ public class XMassTree {
 
             // Append spaces
             tree.append(printingTreeNodes(spacesToAppend, spaces));
-            // Append asterisks
-            tree.append(printingTreeNodes(asterisksToAppend, asterisks));
+
+            // Append asterisks with random colors
+            applyColorToXMassTree(tree, asterisksToAppend, asterisks);
+
             // Append a newline character
             tree.append(newline);
+        }
+    }
+
+    private static void applyColorToXMassTree(StringBuilder tree, int asterisksToAppend,String asterisks) {
+
+        // Define ANSI color codes
+        final String ANSI_RED = "\u001B[31m";
+        final String ANSI_GREEN = "\u001B[32m";
+        final String ANSI_YELLOW = "\u001B[33m";
+        final String ANSI_BLUE = "\u001B[34m";
+        final String ANSI_PURPLE = "\u001B[35m";
+        final String ANSI_CYAN = "\u001B[36m";
+        final String ANSI_ORANGE = "\u001B[38;5;208m";
+        final String ANSI_RESET = "\u001B[0m";
+
+        // Define an array of colors
+        String[] colors = {ANSI_GREEN, ANSI_RED, ANSI_YELLOW, ANSI_BLUE, ANSI_PURPLE, ANSI_CYAN, ANSI_ORANGE};
+
+        Random random = new Random();
+
+        for (int j = 0; j < asterisksToAppend; j++) {
+            // Select a random color for each asterisk
+            String color = colors[random.nextInt(colors.length)];
+            tree.append(color).append(asterisks).append(ANSI_RESET);
         }
     }
 
