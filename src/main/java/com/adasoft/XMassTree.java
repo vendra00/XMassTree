@@ -1,14 +1,13 @@
 package com.adasoft;
 
-import java.io.IOException;
-import java.util.Scanner;
 import java.io.InputStream;
+import java.util.Scanner;
 
 /**
  * This program prints a Christmas tree of a specified height.
  */
 public class XMassTree {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         // Pass System.in as the InputStream to getHeight
         int height = (int) getHeight(System.in);
 
@@ -52,9 +51,8 @@ public class XMassTree {
      * Obtains the height of the tree from user input with validation.
      * @param in InputStream to read from
      * @return Height of the tree (positive double) or -1.0 if input is invalid
-     * @throws IOException if an I/O error occurs
      */
-    public static double getHeight(InputStream in) throws IOException {
+    public static double getHeight(InputStream in) {
         try (Scanner scanner = new Scanner(in)) {
             // Prompt the user for input
             System.out.print("Insert Tree Height: ");

@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class XMassTreeTest {
     @Test
-    public void testXMassTreeHeightOf5() throws IOException {
+    public void testXMassTreeHeightOf5() {
         // Capture the original System.out and System.in
         PrintStream originalOut = System.out;
         InputStream originalIn = System.in;
