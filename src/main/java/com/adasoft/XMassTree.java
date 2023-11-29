@@ -8,19 +8,83 @@ import java.util.Scanner;
  * This program prints a Christmas tree of a specified height.
  */
 public class XMassTree {
+
+    /**
+     * Main method.
+     * @param args Command line arguments
+     */
     public static void main(String[] args) {
+        // Create a Scanner to read from System.in
+        Scanner scanner = new Scanner(System.in);
+
+        // Display the user menu and validate the user choice
+        int choice = validateMenuChoice(scanner);
+
         // Pass System.in as the InputStream to getHeight
         int height = (int) getHeight(System.in);
 
         // Create a StringBuilder to store the tree
         StringBuilder tree = new StringBuilder();
 
-        // Build the tree
-        xMassTreeBuilder(height, tree);
+        // Check user choice and call xMassTreeBuilder accordingly
+        if (userMenu(choice, height, tree, scanner)) return;
 
         // Print the entire tree at once
         System.out.print(tree);
 
+        // Close the scanner
+        scanner.close();
+    }
+
+    /**
+     * Displays the user menu.
+     * @param choice  User choice
+     * @param height Height of the tree
+     * @param tree StringBuilder to store the tree
+     * @param scanner Scanner to read from
+     * @return True if the user choice is invalid, false otherwise
+     */
+    private static boolean userMenu(int choice, int height, StringBuilder tree, Scanner scanner) {
+        // Check user choice and call xMassTreeBuilder accordingly
+        if (choice == 1) {
+            // Build the colored tree
+            xMassTreeBuilder(height, tree, true);
+        } else if (choice == 2) {
+            // Build the non-colored tree
+            xMassTreeBuilder(height, tree, false);
+        } else {
+            System.out.println("Invalid choice. Please select 1 or 2.");
+            scanner.close(); // Don't forget to close the scanner
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Validates the menu choice input.
+     * @param scanner Scanner to read from
+     * @return Validated menu choice (1 or 2)
+     */
+    private static int validateMenuChoice(Scanner scanner) {
+        int choice;
+        while (true) {
+            System.out.println("Choose tree type:");
+            System.out.println("1. Colored Tree");
+            System.out.println("2. Non-Colored Tree");
+            System.out.print("Enter your choice (1 or 2): ");
+
+            if (scanner.hasNextInt()) {
+                choice = scanner.nextInt();
+                if (choice == 1 || choice == 2) {
+                    return choice; // Valid choice
+                } else {
+                    System.out.println("Invalid choice. Please select 1 or 2.");
+                }
+            } else {
+                System.out.println("Invalid input. Please enter a number.");
+            }
+            scanner.nextLine(); // Consume the invalid input
+        }
     }
 
     /**
@@ -28,7 +92,7 @@ public class XMassTree {
      * @param height Height of the tree
      * @param tree StringBuilder to store the tree
      */
-    private static void xMassTreeBuilder(int height, StringBuilder tree) {
+    private static void xMassTreeBuilder(int height, StringBuilder tree, boolean colored) {
 
         for (int i = 0; i < height; i++) { // Loop through each row of the tree
             int spacesToAppend = height - i; // Number of spaces to append in each row
@@ -39,11 +103,17 @@ public class XMassTree {
             String spaces = " "; // Spaces to append
             String newline = "\n"; // Newline character
 
-            // Append spaces
+            // Append spaces in each row
             tree.append(printingTreeNodes(spacesToAppend, spaces));
 
-            // Append asterisks with random colors
-            applyColorToXMassTree(tree, asterisksToAppend, asterisks);
+            // Check if the tree is colored
+            if(colored) {
+                // Apply a random color to each asterisk
+                applyColorToXMassTree(tree, asterisksToAppend, asterisks);
+            } else {
+                // Append asterisks with no color
+                tree.append(printingTreeNodes(asterisksToAppend, asterisks));
+            }
 
             // Append a newline character
             tree.append(newline);
