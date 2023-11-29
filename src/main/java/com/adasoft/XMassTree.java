@@ -50,6 +50,12 @@ public class XMassTree {
         }
     }
 
+    /**
+     * Applies a random color to each asterisk.
+     * @param tree StringBuilder to store the tree
+     * @param asterisksToAppend Number of asterisks to append
+     * @param asterisks Asterisks to append
+     */
     private static void applyColorToXMassTree(StringBuilder tree, int asterisksToAppend,String asterisks) {
 
         // Define ANSI color codes
