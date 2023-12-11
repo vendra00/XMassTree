@@ -1,5 +1,8 @@
 package com.adasoft;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 import java.io.InputStream;
 import java.util.Random;
 import java.util.Scanner;
@@ -65,7 +68,7 @@ public class XMassTree {
      * @param scanner Scanner to read from
      * @return Validated menu choice (1 or 2)
      */
-    private static int validateMenuChoice(Scanner scanner) {
+    private static int validateMenuChoice(@NotNull Scanner scanner) {
         int choice;
         while (true) {
             System.out.println("Choose tree type:");
@@ -175,7 +178,7 @@ public class XMassTree {
      * @param scanner Scanner to read from
      * @return Validated input
      */
-    private static double validateDoubleInput(Scanner scanner) {
+    private static double validateDoubleInput(@NotNull Scanner scanner) {
         while (true) {
             if (scanner.hasNextDouble()) {
                 double input = scanner.nextDouble();
@@ -198,7 +201,8 @@ public class XMassTree {
      * @param character The character to repeat
      * @return A string of repeated characters
      */
-    public static String printingTreeNodes(int count, String character) {
+    @Contract(pure = true)
+    public static @NotNull String printingTreeNodes(int count, @NotNull String character) {
         return character.repeat(count); // Repeat the character count times
     }
 }

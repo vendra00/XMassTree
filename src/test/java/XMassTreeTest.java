@@ -5,6 +5,7 @@ import java.io.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+
 public class XMassTreeTest {
     @Test
     public void testXMassTreeHeightOf5() {
